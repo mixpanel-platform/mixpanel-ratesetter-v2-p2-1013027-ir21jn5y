@@ -47,9 +47,11 @@ MP.api.jql(topWebEventsScript).done(function(results) { //run top events query
   _.each(results[0], function(event){
     topEvents.push(event.key[0])     // create an array to store top 5 events in for later use in chart and queries
   })
+  console.log("top events", topEvents)
 
   MP.api.segment(topEvents[0], campaignProperty, {from: moment().subtract(30, 'days'), to:moment() , unit: 'day', type: 'general', limit: 50}).done(function(topEventOneResult) {
     eventOne = topEventOneResult.sum().values()
+    
 
     _.each(eventOne, function(value, key){ // loop through summed results to pull out all campaign names
       eventOneCampaigns.push(key) // assign to array
